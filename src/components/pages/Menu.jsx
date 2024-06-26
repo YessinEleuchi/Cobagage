@@ -1,22 +1,25 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import Footer from '../footer/Footer';
 
 const Menu = () => {
   return (
-    <Box
+    <div> <Box
       sx={{
-        display: 'flex',        
+        display: 'flex',
         justifyContent: 'center',
-       alignItems: 'center',
+        alignItems: 'center',
         minHeight: '100vh',
-       textAlign: 'center',
-        padding: '10%',
+        textAlign: 'center',        
       }}
     >
       <Typography variant="h1">
         Menu
       </Typography>
     </Box>
+    <Footer />
+    </div>
+    
   );
 };
 

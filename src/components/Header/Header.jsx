@@ -55,7 +55,6 @@ const Header = () => {
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
-                
               >
                 <MenuIcon />
               </IconButton>
@@ -146,7 +145,8 @@ const Header = () => {
                   onClose={handleCloseUserMenu}
                 >
                   {sessions.map((session) => (
-                    <MenuItem key={session} onClick={handleCloseUserMenu}>
+                    <MenuItem key={session} onClick={handleCloseUserMenu} component={Link}
+                      to={`/${session.toLowerCase()}`}>
                       <Typography textAlign="center">{session}</Typography>
                     </MenuItem>
                   ))}
