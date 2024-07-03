@@ -1,0 +1,27 @@
+.button-voyage {
+    background-color: rgb(84, 188, 223) !important;
+    color: white !important;
+    border-radius: 4px !important;
+    padding: 10px 20px !important;
+    font-weight: bold !important;
+    text-transform: none;
+}
+
+.button-voyage:hover {
+    color: red !important;
+    /* Change text color to red on hover */
+}
+
+.button-bagages {
+    background-color: #FF8200 !important;
+    color: white !important;
+    border-radius: 4px !important;
+    padding: 10px 20px !important;
+    font-weight: bold !important;
+    text-transform: none;
+}
+
+.button-bagages:hover {
+    color: red !important;
+    /* Change text color to red on hover */
+}

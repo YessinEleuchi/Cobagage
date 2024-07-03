@@ -1,0 +1,68 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Full height of the viewport */
+}
+
+/* Photo Container */
+.photo-container {
+    background-image: url('../../../Assets/background/inscri.jpg');
+    /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    /* 50% of the viewport height */
+    width: 100%;
+    position: relative;
+}
+
+/* Brightness Overlay */
+.photo-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+    /* White overlay with 30% opacity */
+}
+
+/* Title Style in Photo Container */
+.photo-container h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Text shadow for better readability */
+    color: white;
+    z-index: 2;
+    /* Ensure the title is above the overlay */
+}
+
+/* Form Container */
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}

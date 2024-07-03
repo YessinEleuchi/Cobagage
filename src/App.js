@@ -2,12 +2,15 @@ import React from 'react';
 import Header from './components/Header/Header';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter, Route, Routes , Navigate} from 'react-router-dom';
-import HomePage from './components/pages/HomePage';
+import HomePage from './components/pages/login/home/HomePage.jsx';
 import Menu from './components/pages/Menu';
 import Profil from './components/pages/Profil';
 import Footer from './components/footer/Footer';
 import Inscription from './components/pages/inscription/Inscription.jsx';
 import Login from './components/pages/login/Login.jsx';
+import VoyAnnonce from './components/annonce/VoyAnnonce.jsx';
+import BagageAnnonce from './components/annonce/BagageAnnonce.jsx';
+
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route path="/profil" element={<Profil />} />
           <Route path="/inscription" element={<Inscription />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/VoyAnnonce" element={<VoyAnnonce />} />
+          <Route path="/BagageAnnonce" element={<BagageAnnonce />} />
+
         </Routes>
       <Footer />
       </BrowserRouter>

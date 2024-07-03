@@ -5,10 +5,13 @@ import Flag from 'react-world-flags';
 const Language = () => {
   return (
     <div>
-      <FormControl variant="standard" className="Language" style={{ minWidth: 40 }}>        
+      <FormControl variant="standard" className="Language" style={{ minWidth: 160 }}>
         <Select
           defaultValue="fr"
           style={{ minWidth: 120 }}
+          fullWidth
+          variant="standard"
+          className="Language"
         >
           <MenuItem value="fr">
             <Flag code="FR" style={{ width: 24, height: 16, marginRight: 8 }} /> Français
