@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header/Header';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter, Route, Routes , Navigate} from 'react-router-dom';
-import HomePage from './components/pages/login/home/HomePage.jsx';
+import HomePage from './components/pages/home/HomePage.jsx';
 import Menu from './components/pages/Menu';
 import Profil from './components/pages/Profil';
 import Footer from './components/footer/Footer';

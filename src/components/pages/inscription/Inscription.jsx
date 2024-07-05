@@ -1,203 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react'
+import { useForm, Controller } from 'react-hook-form';
 import './inscription.css';
-
+import './CountrySelect'
 import {
-    Container,
-    TextField,
-    Button,
-    Box,
-    Typography,
-    Select,
-    MenuItem,
-    InputLabel,
-    FormControl,
-    FormControlLabel,
-    Radio,
-    RadioGroup,
-    FormLabel,
-    FormGroup,
-    Checkbox,
+  Container,
+  TextField,
+  Button,
+  Box,
+  Typography,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormGroup,
+  Checkbox,
+  Select,
+  MenuItem,
+  InputLabel,
 } from '@mui/material';
+import CountrySelect from './CountrySelect';
+
 
 const Inscription = () => {
-    const [genre, setGenre] = useState('');
-    const [nom, setNom] = useState('');
-    const [prenom, setPrenom] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [ville, setVille] = useState('');
+ 
 
-    const handleGenreChange = (event) => {
-        setGenre(event.target.value);
-    };
-
-    const handleVilleChange = (event) => {
-        setVille(event.target.value);
-    };
-
-    const [loisir, setLoisir] = useState({
-        music: false,
-        sport: false,
-        cinema: false,
-        lecture: false,
-    });
-
-    const handleLoisir = (e) => {
-        setLoisir({
-            ...loisir,
-            [e.target.name]: e.target.checked,
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert(`${nom} , ${prenom},${email},${password},${genre},${ville} ,Loisirs: ${getSelectedLoisirs()} `);
-    };
-
-    const getSelectedLoisirs = () => {
-        return Object.keys(loisir)
-            .filter((key) => loisir[key])
-            .join(', ');
-    };
-
-    return (
-        <div className="main-container">
-            <div className="photo-container">
-                <h1>S'inscrire</h1>
-                <h2>Accueil S'inscrire  </h2>
-            </div>
-            <div className="form-container">
-                <Container component="main" maxWidth="xs">
-                    <Box
-                        sx={{
-                            marginTop: 8,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Typography component="h1" variant="h5">
-                            Inscription
-                        </Typography>
-                        <Box onSubmit={handleSubmit} component="form" noValidate sx={{ mt: 3 }}>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="nom"
-                                label="Nom"
-                                name="name"
-                                autoComplete="name"
-                                autoFocus
-                                onChange={(e) => setNom(e.target.value)}
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="prenom"
-                                label="Prénom"
-                                name="prenom"
-                                autoComplete="prenom"
-                                onChange={(e) => setPrenom(e.target.value)}
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email"
-                                name="email"
-                                autoComplete="email"
-                                type="email"
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Mot de passe"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <FormControl component="fieldset" margin="normal">
-                                <RadioGroup row value={genre} onChange={handleGenreChange}>
-                                    <FormControlLabel value="female" control={<Radio />} label="Femme" />
-                                    <FormControlLabel value="male" control={<Radio />} label="Homme" />
-                                </RadioGroup>
-                            </FormControl>
-                            <FormControl fullWidth margin="normal">
-                                <InputLabel id="ville-label">Ville</InputLabel>
-                                <Select
-                                    labelId="ville-label"
-                                    id="ville"
-                                    label="Ville"
-                                    defaultValue=""
-                                    onChange={handleVilleChange}
-                                >
-                                    <MenuItem value="Sfax">Sfax</MenuItem>
-                                    <MenuItem value="Tunis">Tunis</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <FormLabel component="legend">Loisir</FormLabel>
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loisir.music}
-                                            onChange={handleLoisir}
-                                            name="music"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Music"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loisir.sport}
-                                            onChange={handleLoisir}
-                                            name="sport"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Sport"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loisir.cinema}
-                                            onChange={handleLoisir}
-                                            name="cinema"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Cinema"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loisir.lecture}
-                                            onChange={handleLoisir}
-                                            name="lecture"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Lecture"
-                                />
-                            </FormGroup>
-                            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                                Submit
-                            </Button>
-                        </Box>
-                    </Box>
-                </Container>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <div className="photo-container">
+        <h1>S'inscrire</h1>
+        <h2>Accueil S'inscrire  </h2>
+      </div>
+    <Box
+      component="form"
+      noValidate
+      sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: '0 auto', padding: 3 , fontWeight:"bold" }}
+    >
+      <Typography variant="h5" gutterBottom>
+        Register
+      </Typography>
+      <TextField
+        label="Nom complet"
+        name="Nom complet"
+        required
+      />
+      
+      <TextField
+        label="Email"
+        name="email"
+        type="email"
+        required
+      />
+      <TextField
+        label="Mot de passe"
+        name="Mot de passe"
+        type="password"
+        required
+      />
+        <TextField
+          label="Confirmez votre mot de passe"
+          name="Confirmez votre mot de passe"
+          type="Confirmez votre mot de passe"
+          required
+        />
+        <CountrySelect />
+      <Button type="submit" variant="contained" color="primary">
+        Register
+      </Button>
+    </Box>
+      </div >
+  );
 };
+
+
 
 export default Inscription;

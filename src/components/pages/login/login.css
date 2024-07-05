@@ -38,28 +38,30 @@ html {
 /* inscription.css */
 
 .photo-container {
-  position: relative;
-  text-align: center;
-  color: white;
-  z-index: 2;
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 2;
 }
 
 .photo-container h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3em;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .photo-container h2 {
-  position: absolute;
-  top: calc(50% + 60px); /* Adjust the distance below h1 */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em; /* Adjust the font size as needed */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: calc(50% + 60px);
+    /* Adjust the distance below h1 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    /* Adjust the font size as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
