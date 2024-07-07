@@ -1,5 +1,7 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SinUpSchema } from "../../../validation/SinUpSchema";
+import { type Inputs } from "../../../validation/SinUpSchema";
 import {
   TextField,
   Button,
@@ -14,26 +16,6 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-
-
-const SinUpSchema = z.object({
-  NomComplet: z.string().min(1, { message: "Nom complet est obligatoire." }),
-  email: z.string().email(),
-  password: z.string()
-    .min(8, { message: "Le mot de passe doit comporter au moins 8 caractères." })
-    .regex(/[A-Z]/, { message: "Le mot de passe doit contenir au moins une lettre majuscule." })
-    .regex(/[a-z]/, { message: "Le mot de passe doit contenir au moins une lettre minuscule." })
-    .regex(/[0-9]/, { message: "Le mot de passe doit contenir au moins un chiffre." })
-    .regex(/[\W_]/, { message: "Le mot de passe doit contenir au moins un caractère spécial." }),
-  confirmPassword: z.string().min(1, { message: "La confirmation du mot de passe est requise." }),
-  country: z.string().nonempty({ message: "Le pays est requis." }),
-  phone: z.string().nonempty({ message: "Le numéro de téléphone est requis." }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Les mots de passe ne correspondent pas.",
-  path: ["confirmPassword"], // Set the path to the field that has the issue
-});
-
-
 
 
 
@@ -51,21 +33,23 @@ interface Country {
   };
 }
 
-type Inputs = z.infer<typeof SinUpSchema>;
+
 
 const Inscription = () => {
-  const { register, handleSubmit, control, formState: { errors } } = useForm < Inputs > ();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Inputs>({
+    mode:"onBlur",
+    resolver: zodResolver(SinUpSchema),
+  });
 
   const submitForm: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     // Add logic for submitting form data, e.g., API call
   };
-
-
-
-
-
-
 
   const [countryState, setCountryState] = useState({
     loading: false,
@@ -82,7 +66,7 @@ const Inscription = () => {
         });
 
         const dataUrl = `https://restcountries.com/v3.1/all`;
-        const response = await axios.get < Country[] > (dataUrl);
+        const response = await axios.get<Country[]>(dataUrl);
 
         setCountryState({
           ...countryState,
@@ -102,7 +86,7 @@ const Inscription = () => {
   }, []);
 
   const { loading, errorMessage, countries } = countryState;
-  const [selectedCountry, setSelectedCountry] = useState < string > ("");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
 
   const handleCountryChange = (value: string) => {
     setSelectedCountry(value);
@@ -137,15 +121,42 @@ const Inscription = () => {
         <Typography variant="h5" gutterBottom>
           Register
         </Typography>
-        <TextField label="Nom complet" required {...register("NomComplet")} />
-        <TextField label="Email" required {...register("email")} />
-
+        <TextField
+          label="Nom complet"
+          required
+          {...register("NomComplet")}
+          error={!!errors.NomComplet}
+          helperText={errors.NomComplet?.message}
+        />
+        <TextField
+          label="Email"
+          required
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
+        <TextField
+          label="Mot de passe"
+          type="password"
+          required
+          {...register("password")}
+          error={!!errors.password}
+          helperText={errors.password?.message}
+        />
+        <TextField
+          label="Confirmez votre mot de passe"
+          type="password"
+          required
+          {...register("confirmPassword")}
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+        />
         <Controller
           name="country"
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <FormControl fullWidth>
+            <FormControl fullWidth error={!!errors.country}>
               <InputLabel id="country-label">Pays</InputLabel>
               <Select
                 labelId="country-label"
@@ -157,6 +168,7 @@ const Inscription = () => {
                 label="Country"
               >
                 <MenuItem value="">
+                  <em>None</em>
                 </MenuItem>
                 {countries.map((item) => (
                   <MenuItem key={uuidv4()} value={item.name.common}>
@@ -164,6 +176,9 @@ const Inscription = () => {
                   </MenuItem>
                 ))}
               </Select>
+              <Typography variant="body2" color="error">
+                {errors.country?.message}
+              </Typography>
             </FormControl>
           )}
         />
@@ -183,6 +198,8 @@ const Inscription = () => {
               type="tel"
               required
               {...register("phone")}
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
             />
           </Box>
         )}
@@ -196,19 +213,12 @@ const Inscription = () => {
             {errorMessage}
           </Typography>
         )}
-        <TextField
-          label="Mot de passe"
-          type="password"
-          required
-          {...register("password")}
-        />
-        <TextField
-          label="Confirmez votre mot de passe"
-          type="password"
-          required
-          {...register("confirmPassword")}
-        />
-        <Button type="submit" variant="contained" color="primary" sx={{ Color: "#f78400" }} >
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ backgroundColor: "#f78400", color: "#fff" }}
+        >
           S'inscrire
         </Button>
       </Box>

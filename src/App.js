@@ -6,7 +6,7 @@ import HomePage from './components/pages/home/HomePage.jsx';
 import Menu from './components/pages/Menu';
 import Profil from './components/pages/Profil';
 import Footer from './components/footer/Footer';
-import Inscription from './components/pages/inscription/Inscription.jsx';
+import Inscription from './components/pages/inscription/Inscription.tsx';
 import Login from './components/pages/login/Login.jsx';
 import VoyAnnonce from './components/annonce/VoyAnnonce.jsx';
 import BagageAnnonce from './components/annonce/BagageAnnonce.jsx';
