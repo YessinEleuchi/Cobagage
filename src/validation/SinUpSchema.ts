@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 const SinUpSchema = z.object({
     NomComplet: z.string().min(1, { message: "Nom complet est obligatoire." }),
     email: z.string().email({ message: "Email invalide" }),

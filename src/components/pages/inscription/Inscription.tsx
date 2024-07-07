@@ -83,7 +83,7 @@ const Inscription = () => {
     };
 
     fetchData();
-  }, []);
+  },);
 
   const { loading, errorMessage, countries } = countryState;
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -112,10 +112,11 @@ const Inscription = () => {
           gap: 2,
           maxWidth: 400,
           margin: "0 auto",
-          padding: 3,
+          padding: 5,
           backgroundColor: "white",
           borderRadius: 2,
           boxShadow: 3,
+          "& .MuiTextField-root": { margin: 1, width: "100%" },
         }}
       >
         <Typography variant="h5" gutterBottom>
