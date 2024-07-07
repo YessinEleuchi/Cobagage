@@ -1,0 +1,75 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Full height of the viewport */
+}
+
+/* Photo Container */
+.photo-container {
+    background-image: url('../../../Assets/background/pik.jpg');
+    /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    /* 50% of the viewport height */
+    width: 100%;
+    position: relative;
+}
+
+
+
+/* Title Style in Photo Container */
+/* inscription.css */
+
+.photo-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.photo-container h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.photo-container h2 {
+    position: absolute;
+    top: calc(50% + 60px);
+    /* Adjust the distance below h1 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    /* Adjust the font size as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Form Container */
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
