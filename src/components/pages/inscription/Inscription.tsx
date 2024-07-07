@@ -42,7 +42,7 @@ const Inscription = () => {
     control,
     formState: { errors },
   } = useForm<Inputs>({
-    mode:"onBlur",
+    mode: "onBlur",
     resolver: zodResolver(SinUpSchema),
   });
 
@@ -83,7 +83,7 @@ const Inscription = () => {
     };
 
     fetchData();
-  },);
+  }, );
 
   const { loading, errorMessage, countries } = countryState;
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -112,11 +112,10 @@ const Inscription = () => {
           gap: 2,
           maxWidth: 400,
           margin: "0 auto",
-          padding: 5,
+          padding: 3,
           backgroundColor: "white",
           borderRadius: 2,
           boxShadow: 3,
-          "& .MuiTextField-root": { margin: 1, width: "100%" },
         }}
       >
         <Typography variant="h5" gutterBottom>
@@ -169,7 +168,6 @@ const Inscription = () => {
                 label="Country"
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 {countries.map((item) => (
                   <MenuItem key={uuidv4()} value={item.name.common}>
