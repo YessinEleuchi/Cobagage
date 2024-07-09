@@ -16,6 +16,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuItem from '@mui/material/MenuItem';
 import Language from '../LanguagePicker/Language';
+import { useEffect } from 'react';
+import { setupNotifications } from '../Notifications/FireBase';
+import { onMessage } from 'firebase/messaging'
+import { messaging } from '../Notifications/FireBase';
 
 const pages = ['HomePage', 'Menu', 'Profil'];
 const sessions = ['Login', 'Inscription'];
@@ -39,6 +43,14 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  useEffect(() => {
+    setupNotifications();
+    // Handle foreground notifications
+    onMessage(messaging, (payload) => {
+      console.log(payload);
+      // Handle the notification or update your UI
+    });
+    }, []);
 
   return (
     <header className="header">

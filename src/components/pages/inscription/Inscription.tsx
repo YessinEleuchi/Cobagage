@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SinUpSchema } from "../../../validation/SinUpSchema";
-import { type Inputs } from "../../../validation/SinUpSchema";
+import { SinUpSchema } from "../../validation/SinUpSchema";
+import { type Inputs } from "../../validation/SinUpSchema";
 import {
   TextField,
   Button,
@@ -83,7 +83,7 @@ const Inscription = () => {
     };
 
     fetchData();
-  }, );
+  }, []);
 
   const { loading, errorMessage, countries } = countryState;
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -136,7 +136,7 @@ const Inscription = () => {
           helperText={errors.email?.message}
         />
         <TextField
-          label="Mot de passe"
+          label="Mot de passe "
           type="password"
           required
           {...register("password")}
@@ -167,8 +167,6 @@ const Inscription = () => {
                 }}
                 label="Country"
               >
-                <MenuItem value="">
-                </MenuItem>
                 {countries.map((item) => (
                   <MenuItem key={uuidv4()} value={item.name.common}>
                     {item.name.common}
