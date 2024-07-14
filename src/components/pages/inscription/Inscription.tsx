@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SinUpSchema } from "../../../validation/SinUpSchema";
-import { type Inputs } from "../../../validation/SinUpSchema";
+import { SinUpSchema } from "./validation/SinUpSchema";
+import { type Inputs } from "./validation/SinUpSchema";
 import {
   TextField,
   Button,
@@ -36,13 +36,15 @@ interface Country {
 
 
 const Inscription = () => {
+  const array = null;
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<Inputs>({
-    mode:"onBlur",
+    mode: "onBlur",
     resolver: zodResolver(SinUpSchema),
   });
 
@@ -58,7 +60,7 @@ const Inscription = () => {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCountriesData = async () => {
       try {
         setCountryState({
           ...countryState,
@@ -82,8 +84,8 @@ const Inscription = () => {
       }
     };
 
-    fetchData();
-  },);
+    fetchCountriesData();
+  }, []);
 
   const { loading, errorMessage, countries } = countryState;
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -112,11 +114,10 @@ const Inscription = () => {
           gap: 2,
           maxWidth: 400,
           margin: "0 auto",
-          padding: 5,
+          padding: 3,
           backgroundColor: "white",
           borderRadius: 2,
           boxShadow: 3,
-          "& .MuiTextField-root": { margin: 1, width: "100%" },
         }}
       >
         <Typography variant="h5" gutterBottom>
@@ -137,7 +138,7 @@ const Inscription = () => {
           helperText={errors.email?.message}
         />
         <TextField
-          label="Mot de passe"
+          label="Mot de passe "
           type="password"
           required
           {...register("password")}
@@ -168,9 +169,6 @@ const Inscription = () => {
                 }}
                 label="Country"
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 {countries.map((item) => (
                   <MenuItem key={uuidv4()} value={item.name.common}>
                     {item.name.common}
@@ -218,7 +216,7 @@ const Inscription = () => {
           type="submit"
           variant="contained"
           color="primary"
-          sx={{ backgroundColor: "#f78400", color: "#fff" }}
+          
         >
           S'inscrire
         </Button>
