@@ -10,6 +10,7 @@ const firebaseConfig = {
     appId: "1:686735255943:web:d134fbbc50907747fd8b22",
     measurementId: "G-CVSL8D28C5"
 };
+
 const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 const setupNotifications = async () => {

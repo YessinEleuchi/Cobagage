@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../Assets/CobagageLogo.png';
 import AppBar from '@mui/material/AppBar';
@@ -16,10 +16,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuItem from '@mui/material/MenuItem';
 import Language from '../LanguagePicker/Language';
-import { useEffect } from 'react';
 import { setupNotifications } from '../Notifications/FireBase';
-import { onMessage } from 'firebase/messaging'
+import { onMessage } from 'firebase/messaging';
 import { messaging } from '../Notifications/FireBase';
+import toast, { Toaster } from 'react-hot-toast';
 
 const pages = ['HomePage', 'Menu', 'Profil'];
 const sessions = ['Login', 'Inscription'];
@@ -43,14 +43,15 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   useEffect(() => {
     setupNotifications();
     // Handle foreground notifications
     onMessage(messaging, (payload) => {
       console.log(payload);
-      // Handle the notification or update your UI
+      toast(payload.notification.body); // Show toast notification
     });
-    }, []);
+  }, []);
 
   return (
     <header className="header">
@@ -98,6 +99,7 @@ const Header = () => {
                     <Typography sx={{ color: 'black' }} textAlign="center">
                       {page}
                     </Typography>
+                    <Toaster />
                   </MenuItem>
                 ))}
               </Menu>
@@ -162,7 +164,6 @@ const Header = () => {
                       <Typography textAlign="center">{session}</Typography>
                     </MenuItem>
                   ))}
-
                 </Menu>
                 <Language />
               </Stack>
@@ -172,7 +173,6 @@ const Header = () => {
       </AppBar>
     </header>
   );
-
 };
 
 export default Header;

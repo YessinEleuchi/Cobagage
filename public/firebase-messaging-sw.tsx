@@ -17,7 +17,6 @@ firebase.initializeApp({
     appId: "1:686735255943:web:d134fbbc50907747fd8b22", // Your Firebase App ID
     measurementId: "G-CVSL8D28C5" // Your Firebase Measurement ID
 });
-
 // Retrieve an instance of Firebase Messaging so that it can handle background messages.
 // This allows the service worker to listen for and handle incoming messages when the web app is not in the foreground.
 const messaging = firebase.messaging();
@@ -29,14 +28,12 @@ messaging.onBackgroundMessage((payload) => {
         '[firebase-messaging-sw.js] Received background message ',
         payload
     );
-
     // Customize notification here
     const notificationTitle = payload.notification.title; // Get the notification title from the payload
     const notificationOptions = {
         body: payload.notification.body, // Get the notification body from the payload
         icon: payload.notification.image, // Get the notification icon from the payload
     };
-
     // Show the notification with the title and options
-    self.registration.showNotification(notificationTitle, notificationOptions);
+   return ( self.registration.showNotification(notificationTitle, notificationOptions);
 });

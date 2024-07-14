@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SinUpSchema } from "../../validation/SinUpSchema";
-import { type Inputs } from "../../validation/SinUpSchema";
+import { SinUpSchema } from "./validation/SinUpSchema";
+import { type Inputs } from "./validation/SinUpSchema";
 import {
   TextField,
   Button,
@@ -36,6 +36,8 @@ interface Country {
 
 
 const Inscription = () => {
+  const array = null;
+
   const {
     register,
     handleSubmit,
@@ -58,7 +60,7 @@ const Inscription = () => {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCountriesData = async () => {
       try {
         setCountryState({
           ...countryState,
@@ -82,7 +84,7 @@ const Inscription = () => {
       }
     };
 
-    fetchData();
+    fetchCountriesData();
   }, []);
 
   const { loading, errorMessage, countries } = countryState;
@@ -214,7 +216,7 @@ const Inscription = () => {
           type="submit"
           variant="contained"
           color="primary"
-          sx={{ backgroundColor: "#f78400", color: "#fff" }}
+          
         >
           S'inscrire
         </Button>
