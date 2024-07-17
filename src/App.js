@@ -5,7 +5,7 @@ import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import Footer from './components/footer/Footer';
 import RoutesNavigator from './Routes';
-import { generateToken, messaging } from "./components/notififcations/Firebase";
+import { generateToken, messaging } from "./components/notifications/Firebase";
 import { onMessage } from "firebase/messaging";
 
 function App() {
@@ -35,7 +35,6 @@ function App() {
                 <RoutesNavigator />
                 <Footer />
             </BrowserRouter>
-
 
 
         </div>
