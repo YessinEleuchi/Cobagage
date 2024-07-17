@@ -35,6 +35,9 @@ function App() {
                 <RoutesNavigator />
                 <Footer />
             </BrowserRouter>
+
+
+
         </div>
     );
 }
