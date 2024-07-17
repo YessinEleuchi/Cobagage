@@ -1,45 +1,41 @@
-
-import logo from './logo.svg';
 import './App.css';
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header/Header';
 import { CssBaseline } from '@mui/material';
-import { BrowserRouter} from 'react-router-dom';
-
+import { BrowserRouter } from 'react-router-dom';
 import Footer from './components/footer/Footer';
-
 import RoutesNavigator from './Routes';
-
+import { generateToken, messaging } from "./components/notififcations/Firebase";
+import { onMessage } from "firebase/messaging";
 
 function App() {
-  return (
-    <div className="App">
+    useEffect(() => {
+        generateToken();
+        onMessage(messaging, (payload) => {
+            console.log('Message received. ', payload);
+            alert(`Foreground notification received: ${payload.notification.title}`);
+        });
+    }, []);
 
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-
-      <CssBaseline />
-      <BrowserRouter>
-        <Header />
-        <RoutesNavigator/>
-    
-      <Footer />
-      </BrowserRouter>
-    </div>
-  );
+    useEffect(() => {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch((err) => {
+                console.log('Service Worker registration failed:', err);
+            });
+        }
+    }, []);
+    return (
+        <div className="App">
+            <CssBaseline />
+            <BrowserRouter>
+                <Header />
+                <RoutesNavigator />
+                <Footer />
+            </BrowserRouter>
+        </div>
+    );
 }
-
 export default App;

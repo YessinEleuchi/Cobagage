@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes,Route, Navigate } from 'react-router-dom';
 import HomePage from './components/pages/home/HomePage.jsx';
-import Menu from './components/pages/Menu';
-import Profil from './components/pages/Profil';
+import Menu from './components/Menu';
+import Profil from './components/Profil';
 import Inscription from './components/pages/inscription/Inscription';
 import Login from './components/pages/login/Login.jsx';
 import VoyAnnonce from './components/annonce/VoyAnnonce.jsx';

@@ -16,9 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuItem from '@mui/material/MenuItem';
 import Language from '../LanguagePicker/Language';
-import { setupNotifications } from '../Notifications/FireBase';
 import { onMessage } from 'firebase/messaging';
-import { messaging } from '../Notifications/FireBase';
 import toast, { Toaster } from 'react-hot-toast';
 
 const pages = ['HomePage', 'Menu', 'Profil'];
@@ -44,14 +42,7 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
-  useEffect(() => {
-    setupNotifications();
-    // Handle foreground notifications
-    onMessage(messaging, (payload) => {
-      console.log(payload);
-      toast(payload.notification.body); // Show toast notification
-    });
-  }, []);
+
 
   return (
     <header className="header">
