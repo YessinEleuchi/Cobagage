@@ -1,3 +1,4 @@
+//Firebase.js
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 
@@ -24,9 +25,8 @@ export const generateToken = async () => {
 
     if (permission === "granted") {
             const token = await getToken(messaging, {
-                vapidKey: publicKey,
+                vapidKey: publicKey ,
             });
             console.log(token);
-
     }
 };
