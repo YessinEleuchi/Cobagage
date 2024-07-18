@@ -1,8 +1,7 @@
-//Firebase.js
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 
-const publicKey =process.env.REACT_APP_FIREBASE_VAPID_KEY;
+const publicKey = process.env.REACT_APP_FIREBASE_VAPID_KEY;
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -13,6 +12,7 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -24,9 +24,7 @@ export const generateToken = async () => {
     console.log("Notification permission:", permission);
 
     if (permission === "granted") {
-            const token = await getToken(messaging, {
-                vapidKey: publicKey ,
-            });
-            console.log(token);
+        const token = await getToken(messaging, { vapidKey: publicKey });
+        console.log(token);
     }
 };

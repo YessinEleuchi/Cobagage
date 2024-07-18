@@ -1,4 +1,3 @@
-//App.js
 import './App.css';
 import React, { useEffect } from 'react';
 import Header from './components/Header/Header';
@@ -8,6 +7,9 @@ import Footer from './components/footer/Footer';
 import RoutesNavigator from './Routes';
 import { generateToken, messaging } from "./components/notifications/Firebase";
 import { onMessage } from "firebase/messaging";
+import { toast, ToastContainer } from "react-toastify";
+import Message from "./components/notifications/Message";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     useEffect(() => {
@@ -28,6 +30,13 @@ function App() {
             });
         }
     }, []);
+
+    useEffect(() => {
+        onMessage(messaging, (payload) => {
+            toast(<Message notification={payload.notification} />);
+        });
+    }, []);
+
     return (
         <div className="App">
             <CssBaseline />
@@ -36,9 +45,9 @@ function App() {
                 <RoutesNavigator />
                 <Footer />
             </BrowserRouter>
-
-
+            <ToastContainer />
         </div>
     );
 }
+
 export default App;
