@@ -1,5 +1,6 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import React, {useState} from 'react';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './login.css';
 
 import {
@@ -8,19 +9,17 @@ import {
   Button,
   Box,
   Typography,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  FormGroup,
-  Checkbox,
-  Select,
-  MenuItem,
-  InputLabel,
+  IconButton,
+  InputAdornment,
+
 } from '@mui/material';
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div>
       <div className="photo-container">
@@ -42,12 +41,21 @@ const Login = () => {
           required
         />
         <TextField
-          label="Mot de passe"
-          name="Mot de passe"
-          type="Mot de passe"
-          required
+            label="Mot de passe"
+            type={showPassword ? "text" : "password"}
+            required
+            InputProps={{
+              endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={togglePasswordVisibility}>
+                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </IconButton>
+                  </InputAdornment>
+              ),
+            }}
         />
-       
+
+
         <Button type="submit" variant="contained" color="primary">
           Connexion
         </Button>
