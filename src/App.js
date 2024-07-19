@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useEffect , useState } from 'react';
 import Header from './components/Header/Header';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,10 +9,13 @@ import { generateToken, messaging } from "./components/notifications/Firebase";
 import { onMessage } from "firebase/messaging";
 
 function App() {
+    const [notification, setNotification] = useState(false);
+
     useEffect(() => {
         generateToken();
         onMessage(messaging, (payload) => {
             console.log('Message received. ', payload);
+            setNotification(true);
         });
     }, []);
 
@@ -21,7 +24,7 @@ function App() {
         <div className="App">
             <CssBaseline />
             <BrowserRouter>
-                <Header />
+                <Header notification={notification} />
                 <RoutesNavigator />
                 <Footer />
             </BrowserRouter>
@@ -29,4 +32,4 @@ function App() {
     );
 }
 
-export default App;
+export default App;
