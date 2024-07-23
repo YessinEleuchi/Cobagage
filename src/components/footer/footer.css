@@ -1,3 +1,17 @@
+.social-icon {
+  width: 40px;
+  margin: 5px;
+  background: none; /* Ensure no background is applied */
+  border: none; /* Remove any borders */
+  display: inline-block;
+}
+
+.image-15, .image-16 {
+  display: inline-block;
+  width: 150px;
+  margin-right: 10px;
+}
+
 .f-footer-regular-2 {
   background-color: #2C2F33;
   color: #ffffff;

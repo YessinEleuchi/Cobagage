@@ -17,6 +17,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import MenuItem from '@mui/material/MenuItem';
 import Language from '../LanguagePicker/Language';
 import Badge from '@mui/material/Badge';
+import Icon from "../notifications/IconNotifications";
 const pages = ['HomePage', 'Menu', 'Profil'];
 const sessions = ['Login', 'Inscription'];
 const Header = ({ notification }) => {
@@ -122,7 +123,7 @@ const Header = ({ notification }) => {
                         to={`/${page.toLowerCase()}`}
                         sx={{ my: 2, color: 'black', display: 'block', fontFamily: 'Arial, sansserif' }}
                     >
-                      {page === 'Profil' && notification ? (
+                      {page === 'Profil' && notification ?(
                           <Badge
                               badgeContent=" "
                               variant="dot"
@@ -137,9 +138,11 @@ const Header = ({ notification }) => {
                     </Button>
                 ))}
               </Box>
-              <Box sx={{ flexGrow: 0 }}>
+
+                <Box sx={{ flexGrow: 0 }}>
                 <Stack direction="row" spacing={3}>
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Icon  notification={notification}/>
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar sx={{ color: 'orange' }}>
                       <AccountCircleIcon />
                     </Avatar>
@@ -168,7 +171,8 @@ const Header = ({ notification }) => {
                         </MenuItem>
                     ))}
                   </Menu>
-                  <Language />
+
+                    <Language />
                 </Stack>
               </Box>
             </Toolbar>
