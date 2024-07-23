@@ -35,11 +35,13 @@ const Icon = () => {
         <div>
             <Badge badgeContent={count} color="secondary">
                 <StyledIcon onClick={handleIconClick} />
+
             </Badge>
             <NotificationsLists
                 anchorEl={anchorEl}
                 open={open}
                 handleClose={handleClose}
+
             />
         </div>
     );
