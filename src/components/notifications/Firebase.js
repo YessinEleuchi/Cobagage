@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { store } from '../../store/Store';
+import { showNotification } from '../../store/notificationSlice';
 
-const publicKey =process.env.REACT_APP_FIREBASE_VAPID_KEY;
+const publicKey = process.env.REACT_APP_FIREBASE_VAPID_KEY;
+
+// Your web app's Firebase configuration
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,10 +16,10 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase Cloud Messaging and get a reference to the service
 export const messaging = getMessaging(app);
 
 export const generateToken = async () => {
@@ -23,10 +27,11 @@ export const generateToken = async () => {
     console.log("Notification permission:", permission);
 
     if (permission === "granted") {
-            const token = await getToken(messaging, {
-                vapidKey: publicKey,
-            });
-            console.log(token);
-
+        const token = await getToken(messaging, { vapidKey: publicKey });
+        console.log("FCM Token:", token);
     }
 };
+onMessage(messaging, (payload) => {
+    console.log('Message received. ', payload);
+    store.dispatch(showNotification(payload.notification));
+});

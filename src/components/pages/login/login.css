@@ -17,27 +17,15 @@ html {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* Full height of the viewport */
 }
 
 /* Photo Container */
 .photo-container {
     background-image: url('../../../Assets/background/pik.jpg');
-    /* Path to your background image */
     background-size: cover;
     background-position: center;
     height: 50vh;
-    /* 50% of the viewport height */
     width: 100%;
-    position: relative;
-}
-
-
-
-/* Title Style in Photo Container */
-/* inscription.css */
-
-.photo-container {
     position: relative;
     text-align: center;
     color: white;
@@ -56,14 +44,11 @@ html {
 .photo-container h2 {
     position: absolute;
     top: calc(50% + 60px);
-    /* Adjust the distance below h1 */
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 2em;
-    /* Adjust the font size as needed */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 
 /* Form Container */
 .form-container {

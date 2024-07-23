@@ -1,41 +1,45 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from './components/Header/Header';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import Footer from './components/footer/Footer';
 import RoutesNavigator from './Routes';
-import { generateToken, messaging } from "./components/notififcations/Firebase";
+import { generateToken, messaging } from "./components/notifications/Firebase";
 import { onMessage } from "firebase/messaging";
+import { Toaster } from 'react-hot-toast';
+import {toast} from "react-hot-toast";
+import { showNotification } from './store/notificationSlice';
+import {useDispatch} from "react-redux";
+
 
 function App() {
+    const dispatch = useDispatch ();
+    const [notification, setNotification] = useState(false);
+
+
     useEffect(() => {
         generateToken();
         onMessage(messaging, (payload) => {
             console.log('Message received. ', payload);
-            alert(`Foreground notification received: ${payload.notification.title}`);
+            setNotification(true);
+            dispatch(showNotification(payload.notification));
+            toast(payload.notification.title + ": " + payload.notification.body);
         });
-    }, []);
+    }, [dispatch]);
 
-    useEffect(() => {
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }).catch((err) => {
-                console.log('Service Worker registration failed:', err);
-            });
-        }
-    }, []);
+
     return (
         <div className="App">
             <CssBaseline />
             <BrowserRouter>
-                <Header />
+                <Header notification={notification} />
                 <RoutesNavigator />
                 <Footer />
+                <Toaster/>
             </BrowserRouter>
         </div>
     );
 }
-export default App;
+
+export default App;

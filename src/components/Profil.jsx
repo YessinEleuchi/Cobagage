@@ -11,7 +11,7 @@ const Profil = () => {
       padding: '10%',}}>
       
         <Typography variant="h1">Profil</Typography>
-      
+      <notif/>
     </Box>
   )
 }
